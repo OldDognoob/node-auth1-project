@@ -7,7 +7,6 @@ const users = require("../users/user-model");
 router.post("/register", (req, res) => {
   console.log("register endpoint");
   const { username, password } = req.body;
-
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   users
@@ -21,9 +20,7 @@ router.post("/register", (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      res
-        .status(500)
-        .json({ message: `There was an error creating this new user` });
+      res.status(500).json({ message: `You shall not pass!` });
     });
 });
 
@@ -46,4 +43,16 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.get("/logout", (req, res) => {
+  console.log("logout endpoint");
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.json({ message: "You shall not pass!" });
+      } else {
+        res.json({ message: "good bye" });
+      }
+    });
+  }
+});
 module.exports = router;

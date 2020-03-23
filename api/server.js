@@ -4,7 +4,9 @@ const cors = require("cors");
 const session = require('express-session');
 
 //Routes initialized and imported...
-// const authRouter = require("../auth/auth-router");
+const authRouter = require("../auth/auth-router");
+const userRouter =require("../users/user-router");
+
 const server = express();
 
 const sessionConfig = {
@@ -34,7 +36,8 @@ const sessionConfig = {
   server.use(cors());
 
 
-// server.use("/auth", authRouter)
+server.use("/auth", authRouter)
+server.use("/api/users",userRouter)
 
 server.get("/", (req, res) => {
     res.json({ api: "up" });
