@@ -1,10 +1,10 @@
-module.exports={
+module.exports=
     protected
-}
+
 function protected(req,res,next){
     if(req.session && req.session.user){
-        next()
+        next();
     }else{
-        res.status(401).end()
+        res.status(401).json({message:'You shall not pass'});
     }
 }
